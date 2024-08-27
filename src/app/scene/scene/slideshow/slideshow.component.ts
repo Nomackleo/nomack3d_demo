@@ -15,6 +15,7 @@ import {
 } from 'angular-three-soba/staging';
 import { NgtsGrid } from 'angular-three-soba/abstractions';
 import { RenderTextureSceneComponent } from './render-texture-scene/render-texture-scene.component';
+import { CameraHandlerComponent } from './camera-handler/camera-handler.component';
 
 extend(THREE);
 
@@ -25,15 +26,18 @@ extend(THREE);
     NgtArgs,
     NgtsOrbitControls,
     NgtsEnvironment,
+    CameraHandlerComponent,
     NgtsGrid,
     NgtsRenderTexture,
     NgtsRenderTextureContent,
-    RenderTextureSceneComponent
+    RenderTextureSceneComponent,
   ],
   template: `
     <ngt-color *args="['#efefef']" attach="background" />
     <ngt-ambient-light [intensity]="0.2 * Math.PI" />
     <ngts-environment [options]="{ preset: 'city' }" />
+    <app-camera-handler [slideDistance]="slideDistance" />
+
     <ngt-group> </ngt-group>
 
     @for (scene of scenes; track scene.name) {

@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { ShowroomScene } from '../utils/state';
 import { NgtArgs, pick } from 'angular-three';
-import { GLTF } from 'three-stdlib';
 import { injectGLTF } from 'angular-three-soba/loaders';
 import { NgtsPerspectiveCamera } from 'angular-three-soba/cameras';
 import { BackSide, Group, MathUtils, Mesh, Object3DEventMap } from 'three';
@@ -160,8 +159,7 @@ export class RenderTextureSceneComponent {
         child.castShadow = child.receiveShadow = true;
       }
     });
-    console.log(model);
-
     return model;
   });
+
 }
