@@ -41,13 +41,9 @@ export class OverlayComponent {
 
   onNextClick() {
     slide.update((prev) => (prev < scenes.length - 1 ? prev + 1 : 0));
-		console.log('next:'+slide());
-
   }
 
   onPrevClick() {
     slide.update((prev) => (prev > 0 ? prev - 1 : scenes.length - 1));
-		console.log('prev:'+slide());
-
   }
 }

@@ -34,7 +34,7 @@ export class CameraHandlerComponent {
   private cameraControlsRef = viewChild.required(NgtsCameraControls);
 
   private lastSlide = 0;
-  private dollyDistance = 9;
+  private dollyDistance = 4.8;
   private positionSlideX = this.viewport().width + this.slideDistance();
 
   constructor() {
@@ -59,20 +59,25 @@ export class CameraHandlerComponent {
 
       autoEffect(() => {
         const currentSlide = slide();
-        if (this.lastSlide === currentSlide) return;
+        if (
+          this.lastSlide === currentSlide &&
+          this.lastSlide &&
+          currentSlide !== 0
+        )
+          return;
         void this.moveToSlide();
         this.lastSlide === currentSlide;
-        console.log(this.lastSlide, currentSlide);
       });
     });
   }
 
   initPosition() {
     const positionX = this.lastSlide * this.positionSlideX;
-    this.lastSlide === 0 ? this.positionSlideX : positionX;
+    if (this.lastSlide !== 0) return positionX;
 
-    return positionX;
+    return this.positionSlideX;
   }
+
   private async moveToSlide() {
     const cameraControls = this.cameraControlsRef().controls();
 
@@ -87,7 +92,7 @@ export class CameraHandlerComponent {
     );
 
     await cameraControls.setLookAt(
-      (slide() + 1) * this.positionSlideX,
+      slide() * this.positionSlideX,
       0,
       this.dollyDistance,
       slide() * this.positionSlideX,
@@ -105,6 +110,6 @@ export class CameraHandlerComponent {
       0,
       true
     );
-    console.log(this.positionSlideX);
+    console.log(slide());
   }
 }
