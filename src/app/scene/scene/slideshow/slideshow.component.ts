@@ -38,8 +38,6 @@ extend(THREE);
     <ngts-environment [options]="{ preset: 'city' }" />
     <app-camera-handler [slideDistance]="slideDistance" />
 
-    <ngt-group> </ngt-group>
-
     @for (scene of scenes; track scene.name) {
     <ngt-mesh [position]="[$index * (viewport().width + slideDistance), 0, 0]">
       <ngt-plane-geometry *args="[viewport().width, viewport().height]" />

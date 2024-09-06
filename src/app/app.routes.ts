@@ -7,8 +7,16 @@ export const routes: Routes = [
     children: [],
   },
   {
+    path: 'second-scene',
+    loadComponent: () => import('./scene/second-scene.component')
+  },
+  {
+    path: 'third-scene',
+    loadComponent: () => import('./scene/third-scene.component')
+  },
+  {
     path: '**',
-    redirectTo: '/scene',
+    redirectTo: '/second-scene',
     pathMatch: 'full',
   },
 ];

@@ -20,7 +20,17 @@ import {
   NgtsRandomizedLights,
 } from 'angular-three-soba/staging';
 
-@Component({
+/**
+ * Render Texture Scene Component
+ *
+ * This component is responsible for rendering a 3D scene with a model,
+ * ambient light, accumulative shadows, randomized lights, and an environment.
+ *
+ * @selector app-render-texture-scene
+ * @standalone true
+ * @imports NgtArgs, NgtsPerspectiveCamera, NgtsOrbitControls, NgtsAccumulativeShadows, NgtsRandomizedLights, NgtsEnvironment, NgtsLightformer
+ * @template
+ */@Component({
   selector: 'app-render-texture-scene',
   standalone: true,
   imports: [
@@ -136,19 +146,49 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class RenderTextureSceneComponent {
+  /**
+   * Math utility
+   */
   Math = Math;
+
+  /**
+   * Degree to radian conversion factor
+   */
   DEG2RAD = MathUtils.DEG2RAD;
+
+  /**
+   * Backside enum value
+   */
   Backside = BackSide;
+
+  /**
+   * Ratio scale for model based on window size
+   */
   protected ratioScale: number = Math.min(
     1.2,
     Math.max(0.5, window.innerWidth / 1920)
   );
+
+  /**
+   * Input signal for scene data
+   */
   scene: InputSignal<any> = input.required<ShowroomScene>();
 
+  /**
+   * Signal for model name
+   */
   name: Signal<'Cybertruck' | 'Model 3' | 'Semi'> = pick(this.scene, 'name');
 
+  /**
+   * GLTF model signal
+   */
   private gltf: Signal<any> = injectGLTF(() => this.scene().path);
+
+  /**
+   * Computed model signal
+   */
   model = computed(() => {
     const gltf = this.gltf();
     if (!gltf) return null;
@@ -161,5 +201,4 @@ export class RenderTextureSceneComponent {
     });
     return model;
   });
-
 }

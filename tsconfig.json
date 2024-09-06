@@ -4,6 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
+      "@fonts/*": ["./public/fonts"],
       "@scene/*": ["./src/app/scene/"]
     },
     "outDir": "./dist/out-tsc",
